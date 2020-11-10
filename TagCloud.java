@@ -1,26 +1,36 @@
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.io.IOException;
 import java.util.Scanner;
+import java.net.MalformedURLException;
+public class tagCloud
+{
+	static String s;
+public static void run()throws Exception
+ {
+try {
+ URL myURL = new URL("https://news.ycombinator.com/"); //https://www.unm.edu/~gmartin/535/Sticks.htm
+ URLConnection site = myURL.openConnection();
+ site.connect();
+ Scanner file = new Scanner( site.getInputStream() );
+ s= file.useDelimiter( "\\Z" ).next() ;
+}
 
-public class tagCloud { //scrapes data
-	public static void main(String[] args);
-	{
-		try {
-			URL myURL = new URL ("http://example.com/");
-			URLConnection site = myURL.openConnection();
-			site.connect();
-			
-			Scanner in = new Scanner(site.getInputStream());
-			System.out.println(in.useDelimiter("\\Z").next());
-		}
-		catch (MalformedURLException e){
-			//new URL() failed
-		}
-		catch(IOException e) {
-			// openConnection() failed
-		}
-	}
-	public static void run(String)
-}//switch other to run and this to main
+catch (MalformedURLException e) {
+ // new URL() failed
+ // ...
+}
+catch (IOException e) {
+ // openConnection() failed
+ // ...
+}
+ }
+ public static String getUrl()
+ {
+	 return s;
+ }
+ public static void main(String[] args) throws Exception
+ {
+	 tagCloud.run();
+ }
+}
