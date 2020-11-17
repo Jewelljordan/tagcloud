@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class mapCloud extends tagCloud
 {
@@ -14,7 +15,11 @@ static String current="";
 	{
 		tagCloud.run();
 		String url=tagCloud.getUrl();
+		//System.out.println(url);
+		url=url.replaceAll("[\n\r]"," ");
 		System.out.println(url);
+		
+		
 		while(url.contains("<title>") && url.contains("</title>"))
 		{
 			first=url.lastIndexOf("<title>"); 
@@ -33,24 +38,179 @@ static String current="";
 			//System.out.println(cloud);			
 		}
 	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		while(url.contains("<h1>") && url.contains("</h1>"))
 		{
 			first=url.lastIndexOf("<h1>"); 
 			last=url.lastIndexOf("</h1>"); 
 			current=url.substring(first+4,last);
-			String[] title=current.split(" ");
-			for(String s:title)   //adds all of the words in title to cloud map with their correct numerical value
+			String[] h1=current.split(" ");
+			for(String s:h1)   //adds all of the words in title to cloud map with their correct numerical value
 			{
 				if(cloud.containsKey(s))
 					cloud.put(s,cloud.get(s)+10);
 				if(!cloud.containsKey(s))
 					cloud.put(s, 10);	
 			}
-			url=url.replaceFirst("<title>.*</title>"," ");
+			url=url.replaceFirst("<h1>.*</h1>"," ");
 		}
+		while(url.contains("<h2>") && url.contains("</h2>"))
+		{
+			first=url.lastIndexOf("<h2>"); 
+			last=url.lastIndexOf("</h2>"); 
+			current=url.substring(first+4,last);
+			String[] h2=current.split(" ");
+			for(String s:h2)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(s))
+					cloud.put(s,cloud.get(s)+8);
+				if(!cloud.containsKey(s))
+					cloud.put(s, 8);	
+			}
+			url=url.replaceFirst("<h2>.*</h2>"," ");
+		}
+		while(url.contains("<h3>") && url.contains("</h3>"))
+		{
+			first=url.lastIndexOf("<h3>"); 
+			last=url.lastIndexOf("</h3>"); 
+			current=url.substring(first+4,last);
+			String[] h3=current.split(" ");
+			for(String s:h3)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(s))
+					cloud.put(s,cloud.get(s)+6);
+				if(!cloud.containsKey(s))
+					cloud.put(s, 6);	
+			}
+			url=url.replaceFirst("<h3>.*</h3>"," ");
+		}
+		while(url.contains("<h4>") && url.contains("</h4>"))
+		{
+			first=url.lastIndexOf("<h4>"); 
+			last=url.lastIndexOf("</h4>"); 
+			current=url.substring(first+4,last);
+			String[] h4=current.split(" ");
+			for(String s:h4)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(s))
+					cloud.put(s,cloud.get(s)+4);
+				if(!cloud.containsKey(s))
+					cloud.put(s, 4);	
+			}
+			url=url.replaceFirst("<h4>.*</h4>"," ");
+		}
+		while(url.contains("<h5>") && url.contains("</h5>"))
+		{
+			first=url.lastIndexOf("<h5>"); 
+			last=url.lastIndexOf("</h5>"); 
+			current=url.substring(first+4,last);
+			String[] h5=current.split(" ");
+			for(String s:h5)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(s))
+					cloud.put(s,cloud.get(s)+2);
+				if(!cloud.containsKey(s))
+					cloud.put(s, 2);	
+			}
+			url=url.replaceFirst("<h5>.*</h5>"," ");
+		}
+		while(url.contains("<h6>") && url.contains("</h6>"))
+		{
+			first=url.lastIndexOf("<h6>"); 
+			last=url.lastIndexOf("</h6>"); 
+			current=url.substring(first+4,last);
+			String[] h6=current.split(" ");
+			for(String s:h6)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(s))
+					cloud.put(s,cloud.get(s)+1);
+				if(!cloud.containsKey(s))
+					cloud.put(s, 1);	
+			}
+			url=url.replaceFirst("<h6>.*</h6>"," ");
+		}
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		while(url.contains("<a href") && url.contains("</a>"))// for(int x=0; x<2; x++)
+		{
+			first=url.indexOf("<a "); 
+			last=url.indexOf("</a>");
+			current=url.substring(first+2,last);
+			//System.out.println(current);
+			String lastcarrot= current.substring(current.lastIndexOf(">"));
+			//System.out.println(lastcarrot);
+			if(lastcarrot.length()>1) //cut out the carrot key
+			{
+				lastcarrot=lastcarrot.substring(1);
+			}
+			else
+			{
+				lastcarrot="";
+			}
+			//System.out.println("A");
+			//System.out.println(lastcarrot);
+			//System.out.println("A");
+			String[] a=lastcarrot.split(" ");
+			for(String place:a)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(place))
+					cloud.put(place,cloud.get(place)+5);     
+				if(!cloud.containsKey(place))
+					cloud.put(place, 5);	
+				//System.out.println(place);
+			}
+			url=url.substring(0,first) + url.substring(last+4);         // 	<a  </a>																						 //[\\<]a\\s.*[\\<][\\/]a[\\>]
+			
+		}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*while(url.contains("<ul>") && url.contains("</ul>"))
+		{
+			first=url.indexOf("<ul>"); 
+			last=url.indexOf("</ul>"); 
+			current=url.substring(first,last);
+			String[] list=current.split("<ul>");
+			//make sure the remove white space 
+		}*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		while(url.contains("<p class") && url.contains("</p>"))
+		{
+			first=url.indexOf("<p class");
+			last=url.indexOf("</p>");
+			current=url.substring(first+7,last);
+			String lastcarrot=current.substring(current.lastIndexOf(">"));
+			if(lastcarrot.length()>1)
+			{
+				lastcarrot=lastcarrot.substring(1);
+			}
+			else
+			{
+				lastcarrot="";
+			}
+			String[] a=lastcarrot.split(" ");
+			for(String place:a)   //adds all of the words in title to cloud map with their correct numerical value
+			{
+				if(cloud.containsKey(place))
+					cloud.put(place,cloud.get(place)+5);     
+				if(!cloud.containsKey(place))
+					cloud.put(place, 5);	
+				//System.out.println(place);
+			}
+			url=url.substring(0,first) + url.substring(last+4);
+		}
+		
+		if(cloud.containsKey(""))
+			cloud.remove("");
+		System.out.println(url);
+		System.out.println();
+		System.out.println(cloud);
+		System.out.println("a");
+	
+	
+
+	
 	}
 }
-
 
 
 
@@ -69,3 +229,4 @@ static String current="";
  <li> word </li> worth 1
 </ul>
 */
+
