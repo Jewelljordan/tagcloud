@@ -11,7 +11,7 @@ static int last=0; //ending index of the current string you are on
 static String current="";
 
 
-	public static void main(String[] args) throws Exception
+	public static void runs() throws Exception //public static void main(String[] args) throws Exception
 	{
 		urlCloud.run();
 		String url=urlCloud.getUrl();
@@ -323,13 +323,18 @@ static String current="";
 			cloud.remove("");
 		if(cloud.containsKey(","))
 			cloud.remove(",");
-		//System.out.println(url);
-		//System.out.println();
-		System.out.println(cloud);
-	
+		//System.out.println(cloud);
 	
 
 	
+	}
+	public static void main(String[] args) throws Exception
+	{
+		mapCloud.runs();
+	}
+	public static Map<String, Integer> getMap()
+	{
+		return cloud;
 	}
 	
 }
@@ -351,4 +356,3 @@ static String current="";
  <li> word </li> worth 1
 </ul>
 */
-//
