@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javafx.util.Pair;
 
 public class mapCloud extends urlCloud
 {
@@ -9,6 +12,7 @@ static Map<String, Integer> cloud=new HashMap<String,Integer>();
 static int first=0; //starting index of the current string you are on
 static int last=0; //ending index of the current string you are on
 static String current="";
+static ArrayList<Pair> pairs;
 
 
 	public static void runs() throws Exception //public static void main(String[] args) throws Exception
@@ -324,9 +328,28 @@ static String current="";
 		if(cloud.containsKey(","))
 			cloud.remove(",");
 		//System.out.println(cloud);
+		
+		pairs = new ArrayList<Pair>();
+		for (String s: cloud.keySet()) {
+			pairs.add(new Pair(s,cloud.get(s)));
+		}
+		Collections.sort(pairs);
 	
-
-	
+	}
+	public class Pair implements Comparable<Pair>{
+		String num;
+		int times;
+		public Pair(String a, int b) {
+			num = a;
+			times = b;
+		}
+		public int compareTo(Pair a) {
+			if (num == a.num) return -1*Integer.compare(times, a.times);
+			return a.num.compareTo(num);
+		}
+		public String toString() {
+			return num + " " + times;
+		}
 	}
 	public static void main(String[] args) throws Exception
 	{
