@@ -17,7 +17,7 @@ static String current="";
 		String url=tagCloud.getUrl();
 		//System.out.println(url);
 		url=url.replaceAll("[\n\r]"," ");
-		System.out.println(url);
+		//System.out.println(url);
 		
 		
 		while(url.contains("<title>") && url.contains("</title>"))
@@ -323,8 +323,8 @@ static String current="";
 			cloud.remove("");
 		if(cloud.containsKey(","))
 			cloud.remove(",");
-		System.out.println(url);
-		System.out.println();
+		//System.out.println(url);
+		//System.out.println();
 		System.out.println(cloud);
 	
 	
