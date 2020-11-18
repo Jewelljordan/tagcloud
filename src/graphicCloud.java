@@ -23,7 +23,21 @@ public class graphicCloud extends JPanel
 		rectangles = new ArrayList<Rectangle>();
 		
 	}
-
+	public class Pair implements Comparable<Pair>{
+		String num;
+		int times;
+		public Pair(String a, int b) {
+			num = a;
+			times = b;
+		}
+		public int compareTo(Pair a) {
+			if (num == a.num) return -1*Integer.compare(times, a.times);
+			return a.num.compareTo(num);
+		}
+		public String toString() {
+			return num + " " + times;
+		}
+	}
 	public void paint( Graphics g ){
 		Set<String> keys= new TreeSet<String>();
 		keys = cloud.keySet();
