@@ -3,30 +3,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class mapCloud //took off extends
+public class mapCloud extends urlCloud
 {
-static Map<String, Integer> cloud;
+static Map<String, Integer> cloud=new HashMap<String,Integer>();
 static int first=0; //starting index of the current string you are on
 static int last=0; //ending index of the current string you are on
 static String current="";
-static String data;
-
-
-	public mapCloud(String s) {
-	// TODO Auto-generated constructor stub
-		data=s;
-		cloud=new HashMap<String,Integer>();
-}
 
 
 	public static void main(String[] args) throws Exception
 	{
-		//urlCloud.run();
-		//String url=urlCloud.getUrl();
-		String url=data;
+		urlCloud.run();
+		String url=urlCloud.getUrl();
 		//System.out.println(url);
 		url=url.replaceAll("[\n\r]"," ");
-		System.out.println(url);
+		//System.out.println(url);
 		
 		
 		while(url.contains("<title>") && url.contains("</title>"))
@@ -279,7 +270,7 @@ static String data;
 					lastcarrot="";
 				}
 				String[] a=lastcarrot.split(" ");
-				for(String place:a)   //adds all of the words in title to cloud map with their correct numerical value
+				for(String s:a)   //adds all of the words in title to cloud map with their correct numerical value
 				{
 					if(s.length()>1 && (s.substring(s.length()-1).equals(".") || s.substring(s.length()-1).equals(","))) {
 						if(cloud.containsKey(s.substring(0,s.length()-1)))
@@ -332,20 +323,15 @@ static String data;
 			cloud.remove("");
 		if(cloud.containsKey(","))
 			cloud.remove(",");
-		System.out.println(url);
-		System.out.println();
+		//System.out.println(url);
+		//System.out.println();
 		System.out.println(cloud);
 	
 	
 
 	
 	}
-
-
-	public Map<String, Integer> getMap() {
-		// TODO Auto-generated method stub
-		return cloud;
-	}
+	
 }
 
 
