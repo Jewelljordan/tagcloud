@@ -5,15 +5,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.swing.*;
-
-import mapCloud.Pair; 
 
 public class graphicCloud extends JPanel
 {
 	private Map<String, Integer> cloud;
-	private ArrayList<Pair> pairs;
+	private ArrayList<mapCloud.Pair> pairs;
 	private ArrayList<Rectangle> rectangles;
     private int x;
     private int y;
@@ -27,35 +24,15 @@ public class graphicCloud extends JPanel
 		
 	}
 	*/
-
-	public graphicCloud(ArrayList<Pair> list) {
+	public graphicCloud(ArrayList<mapCloud.Pair> list) {
 		setBackground(Color.WHITE);
 		pairs = list;
 		x=300;//needs to be middle
 		y=400;
 		rectangles = new ArrayList<Rectangle>();
 	}
-	public class Pair implements Comparable<Pair>{
-		String num;
-		int times;
-		
-		public Pair(String a, int b) {
-			num = a;
-			times = b;
-		}
-		public int compareTo(Pair a) {
-			if (num == a.num) return -1*Integer.compare(times, a.times);
-			return a.num.compareTo(num);
-		}
-		public String toString() {
-			return num + " " + times;
-		}
-		public int getValue() {return times;}
-		public String getWord() {return num;}
-	}
-
 	public void paint( Graphics g ){ //cloud.get(current) == value, current = string
-		for(Pair pair:pairs) {
+		for(mapCloud.Pair pair: pairs) {
 			Rectangle a = new Rectangle(x, y, pair.getValue()*pair.getWord().length()/2, pair.getValue());
 			//Rectangle a = new Rectangle(x, y,((cloud.get(current))*(current.length()))/2,cloud.get(current));
 			//rectangles.add(a);

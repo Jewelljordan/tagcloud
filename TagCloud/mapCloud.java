@@ -327,7 +327,7 @@ static ArrayList<Pair> pairs;
 			cloud.remove("");
 		if(cloud.containsKey(","))
 			cloud.remove(",");
-		//System.out.println(cloud);
+		System.out.println(cloud);
 		
 		pairs = new ArrayList<Pair>();
 		for (String s: cloud.keySet()) {
@@ -335,9 +335,9 @@ static ArrayList<Pair> pairs;
 			
 		}
 		Collections.sort(pairs);
-	
+		System.out.println(pairs);
 	}
-	public class Pair implements Comparable<Pair>{
+	public static class Pair implements Comparable<Pair>{
 		String num;
 		int times;
 		public Pair(String a, int b) {
@@ -351,6 +351,9 @@ static ArrayList<Pair> pairs;
 		public String toString() {
 			return num + " " + times;
 		}
+
+		public int getValue() {return times;}
+		public String getWord() {return num;}
 	}
 	public static void main(String[] args) throws Exception
 	{

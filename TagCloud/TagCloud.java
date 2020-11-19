@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.*;
 
 public class TagCloud extends JFrame {
 	static String s;
@@ -60,20 +61,5 @@ public class TagCloud extends JFrame {
 		graphic = new graphicCloud(mapCloud.getList()); //using the graphics (need getmap class in mapcloud)
 		
 		new TagCloud();
-	}
-	public class Pair implements Comparable<Pair>{
-		String num;
-		int times;
-		public Pair(String a, int b) {
-			num = a;
-			times = b;
-		}
-		public int compareTo(Pair a) {
-			if (num == a.num) return -1*Integer.compare(times, a.times);
-			return a.num.compareTo(num);
-		}
-		public String toString() {
-			return num + " " + times;
-		}
 	}
 }
